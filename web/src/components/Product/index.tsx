@@ -19,7 +19,7 @@ const Product: React.FC = () => {
     <Container>
       <Row>
         <a href="#">Compartilhar</a>
-        <a href="#">Vender um igual</a>
+        <a href="#">Voltar</a>
       </Row>
 
       <Panel>

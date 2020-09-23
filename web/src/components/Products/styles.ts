@@ -26,8 +26,7 @@ export const Row = styled.div`
 export const Panel = styled.div`
   background: var(--color-white);
   box-shadow: var(--panel-shadow);
-  display: grid;
-  grid-template-columns: 65fr 35fr;
+  display: column;
 `;
 
 export const Column = styled.div`
@@ -92,5 +91,42 @@ export const Description = styled.div`
     font-size: 20px;
     color: var(--color-gray);
     line-height: 27px;
+  }
+`;
+
+type ButtonProps = { solid?: boolean };
+
+export const Button = styled.button<ButtonProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 15px;
+  border-radius: 4px;
+  padding: 12px 10px;
+  margin-top: 10px;
+
+  color: ${(props) =>
+    props.solid ? "var(--color-white)" : "var(--color-blue)"};
+  background: ${(props) => (props.solid ? "var(--color-blue)" : "transparent")};
+  border: ${(props) => (props.solid ? "none" : "1px solid var(--color-blue)")};
+
+  cursor: pointer;
+`;
+
+export const PriceCard = styled.div`
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const PriceRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+  font-size: 30px;
+  font-weight: 300;
+
+  .cents {
+    font-size: 20px;
   }
 `;
