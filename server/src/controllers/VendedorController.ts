@@ -3,7 +3,7 @@
 import { Request, Response } from 'express';
 import db from '../db/connection';
 
-export default class ConnectionsController {
+export default class VendedorController {
   async index(req: Request, res: Response) {
     const vendedores = await db('vendedor').select('*');
     return res.json(vendedores);

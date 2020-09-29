@@ -3,14 +3,7 @@
 import { Response, Request } from 'express';
 
 import db from "../db/connection";
-
-interface ScheduleItem {
-  week_day: number,
-  from: string,
-  to: string,
-}
-
-export default class ClassesController {
+export default class ProdutosController {
   async index(req: Request, res: Response) {
 
     const produtos = await db('produtos').select('*');
@@ -23,7 +16,7 @@ export default class ClassesController {
     const produto = await db('produtos')
                           .where('produtos.id', '=', idProduto)
                           .join('vendedor', 'produtos.id_vendedor', '=', 'vendedor.id')
-                          .select(['produtos.*', 'vendedor.*'])
+                          .select(['produtos.*', 'vendedor.localizacao','vendedor.numero_vendas','vendedor.classificacao'])
     return res.json(produto);
   }
 
@@ -51,5 +44,16 @@ export default class ClassesController {
 
       return res.status(400).json({ error: 'Unexpected error while creating new class.' });
     }
+  }
+
+  async destroy(req: Request, res: Response){
+    const {nome,token} = req.params;
+    if (!token || token != 'e699b28cf753359d4c3af03da3945719') {
+      return res.status(400).json({
+        error: 'Token Inválido',
+      });
+    }
+    await db('produtos').where('nome', nome).del();
+    return res.status(200).send();
   }
 }
